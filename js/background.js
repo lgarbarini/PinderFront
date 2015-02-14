@@ -205,11 +205,13 @@ function getMatchList(user_id,c){
 	    },
 	    success: function(msg) {
             //clear matches here
-            for(var i=0;i<msg.length;i++){
+				matchesContainer.innerHTML="";
+            for(var i=0;i<msg.list.length;i++){
                 var newMatchCard = document.createElement("div");
                 newMatchCard.classList.add('matchCard');
-                makeChild(d.title, '', 'h1', newMatchCard);
-                makeChild(d.country, 'toggle', 'p', newMatchCard);
+                makeChild(msg.list[i].title, '', 'h2', newMatchCard);
+                makeChild(msg.list[i].country, 'toggle', 'p', newMatchCard);
+								matchesContainer.appendChild(newMatchCard);
 	       }
         }
 	});

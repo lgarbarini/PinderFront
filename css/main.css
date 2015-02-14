@@ -200,6 +200,7 @@ html, body{
     top: 6%;
     left: 100%; 
     transition: left 1s;
+		overflow: scroll;
 }
 
 .open{
