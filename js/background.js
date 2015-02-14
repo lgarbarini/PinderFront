@@ -3,8 +3,12 @@ var optionsContainer = document.getElementById( 'optionsContainer' );
 var swipeyPageContainer = document.getElementById( 'swipeyPageContainer' );
 var matchesContainer = document.getElementById( 'matchesContainer' );
 
+/* remove card from top of deck, add one to back */
+function showNextCard(){
+    
+}
 
-
+/* match functions */
 function matchNo(){
     console.log('nope');
 }
