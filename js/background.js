@@ -90,15 +90,17 @@ function cardClick(e){
 /* match functions */
 function matchNo(){
     console.log('nope');
-		showNextCard('Left');
+    showNextCard('Left');
+    hideDetail();
 }
 
 function matchYes(){
     console.log("it's a match");
-		var user_id = document.getElementById('userid').innerText;
-		swipeRight(user_id,document.getElementById('op_id').innerText);
-		showNextCard('Right');
-		
+    var user_id = document.getElementById('userid').innerText;
+    swipeRight(user_id,document.getElementById('op_id').innerText);
+    showNextCard('Right');
+    hideDetail();
+
 }
 
 /* Page Show/Hide Functions */
