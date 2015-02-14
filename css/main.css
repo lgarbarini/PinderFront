@@ -36,17 +36,18 @@ html, body{
 
 #optionsContainer{
     background: violet;
-    width: 0%; 
+    width: 30%; 
     height: 94%;
     overflow: hidden;
     position: absolute;
+    left: -30%;
     z-index: 99;
-    transition: width .5s;
+    transition: left .5s;
 
 }
 
 .optionsOpen{
-    width: 30% !important; /* opens menu */
+    left: 0% !important; /* opens menu */
 }
 
 .option{
