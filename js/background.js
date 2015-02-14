@@ -20,13 +20,8 @@ function showNextCard(dir){
     setTimeout( function(){cardsContainer.removeChild(cardsContainer.firstElementChild)}, 700);
     
     //add new card 
-<<<<<<< HEAD
-    var user_id = document.getElementById('userid');
-    getNextOp(user_id,addCard);
-=======
 		var user_id = document.getElementById('userid').innerText;
 		getNextOp(user_id,addCard);
->>>>>>> Swiping right now works, leaving swiping right for later, match list partially implemented
 }
 
 //takes JSON object (results[i] from backend)
