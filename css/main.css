@@ -6,6 +6,9 @@ html, body{
     height: 100%;
     overflow: hidden;
 }
+ h1, p{
+    color: black;
+ }
 
 #page{
     background: red;
@@ -57,7 +60,7 @@ html, body{
 
 .optionsPage{
     background: #1eac75;
-    height: 94%;
+    height: 94%%;
     width: 100%; 
     left: 100%; /* move to zero to and 0*/
     float: left;
