@@ -1,11 +1,35 @@
 var menu = document.getElementById( 'menu' );
 var optionsContainer = document.getElementById( 'optionsContainer' );
 var swipeyPageContainer = document.getElementById( 'swipeyPageContainer' );
+var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
 
 /* remove card from top of deck, add one to back */
 function showNextCard(){
+    //remove top card
+    cardsContainer.removeChild(cardsContainer.firstElementChild);
     
+    //add new card 
+    //addCard( data );
+}
+
+//takes JSON object (results[i] from backend)
+function addCard(d){
+    var newCard = document.createElement("div");
+    newCard.classList.add('card');
+    
+    //example use (should for loop through info from d )
+    makeChild('fdsafdas','p',newCard);
+    
+    cardsContainer.appendChild(newCard);
+}
+
+//makes child node (not gonna make prototype because lazy)
+//content is string of content, tag is string of tag type
+function makeChild(content,tag,parent){
+    var el = document.createElement( tag );
+    el.innerText = content; //maybe use innerHTML for more control
+    parent.appendChild( el );
 }
 
 /* match functions */
