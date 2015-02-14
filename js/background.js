@@ -4,6 +4,7 @@ var swipeyPageContainer = document.getElementById( 'swipeyPageContainer' );
 var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
 var optionsPages = document.getElementById('optionsPages');
+var detailContainer = document.getElementById( 'detailContainer' );
 
 /* onload run addCard 3 times to populate deck of cards */
 
@@ -38,8 +39,8 @@ function addCard(d){
 		makeChild('<div id=\"op_id\" style=\"display: none;\">'+d.req_id+'</div>', '', 'div', newCard);
 		makeChild('<img src=\"'+d.country_flag_image+'\" style=\"clip-path: ellipse(100px 75px at center); -webkit-clip-path:ellipse(100px 75px at center);-moz-clip-path:ellipse(100px 75px at center);\"><img>', '','p',newCard)
     cardsContainer.appendChild(newCard);
-    cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
-    cardsContainer.lastElementChild.addEventListener('mouseup', cardClick, false);
+    //cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
+    cardsContainer.lastElementChild.addEventListener('mousedown', function(){showDetail(d)}, false);
 }
 
 //makes child node (not gonna make prototype because lazy)
@@ -73,7 +74,7 @@ function matchNo(){
 }
 
 function matchYes(){
-    console.log("it's a match motherfucker");
+    console.log("it's a match");
 		var user_id = document.getElementById('userid').innerText;
 		swipeRight(user_id,document.getElementById('op_id').innerText);
 		showNextCard('Right');
@@ -114,19 +115,35 @@ function hideOptions(){
 
 function showSearch(){
     console.log("show search");
-    matchesContainer.classList.remove('matchesOpen');
+    matchesContainer.classList.remove('open');
     swipeyPageContainer.classList.remove('SPmatchesOpen');
 }
 
 function showMatches(){
     console.log("show matches");
-    matchesContainer.classList.add('matchesOpen');
+    matchesContainer.classList.add('open');
     swipeyPageContainer.classList.add('SPmatchesOpen');
 		var user_id = document.getElementById('userid').innerText;
 		getMatchList(user_id);
   //  page.addEventListener('mousedown', hideMatches);
 }
 
+function showDetail(d){
+    console.log("show detail" + d);
+    detailContainer.classList.add('open');
+    makeChild(d.title, '', 'h1', detailContainer);
+    makeChild(d.country, '', 'p', detailContainer);
+    makeChild(d.project_description, '', 'p', detailContainer);
+
+    menu.addEventListener('click', hideDetail);
+
+}
+
+function hideDetail(){
+    detailContainer.classList.remove('open');
+    menu.removeEventListener('click', hideDetail);
+
+}
 
 function getNextOp(user_id,c){
 	$.ajax({
@@ -165,13 +182,14 @@ function getMatchList(user_id,c){
 	        console.log(jqXHR)
 	    },
 	    success: function(msg) {
-	    		 makeChild(msg, '', 'div', matchesContainer);
-	    }
+            //clear matches here
+            for(var i=0;i<msg.length;i++){
+                var newMatchCard = document.createElement("div");
+                newMatchCard.classList.add('matchCard');
+                makeChild(d.title, '', 'h1', newMatchCard);
+                makeChild(d.country, 'toggle', 'p', newMatchCard);
+	       }
+        }
 	});
 }
-//function hideMatches(){
-//    console.log("hide matches");
-//    matchesContainer.classList.remove('matchesOpen');
-//    swipeyPageContainer.classList.remove('SPmatchesOpen');
-//    page.removeEventListener('mousedown', hideMatches);   
-//}
+

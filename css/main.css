@@ -182,6 +182,25 @@ html, body{
 
 }
 
-.matchesOpen{
+.open{
     left: 0 !important;
 }
+
+.matchCard{
+    background: cyan;
+    width: 100%;
+    height: 10%;
+    left: 0;
+}
+
+#detailContainer{
+    background: red ;
+    height: 94%;
+    width: 100%;
+    position: absolute;
+    top: 6%;
+    left: 100%; 
+    transition: left 1s;
+    z-index: 99;
+}
+
