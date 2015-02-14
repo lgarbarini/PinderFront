@@ -54,10 +54,10 @@ function addCard(d){
     //conver to for loop once we know what to make;
     //these are strings since I'm too lazy to make d a real JSON object
     makeChild(d.title, '', 'h1', newCard);
-    makeChild(d.country, 'toggle', 'p', newCard);
+    makeChild(capitaliseFirstLetter(d.country), 'toggle', 'p', newCard);
     makeChild(d.project_description, 'toggle hidden', 'p', newCard);
 		makeChild('<div id=\"op_id\" style=\"display: none;\">'+d.req_id+'</div>', '', 'div', newCard);
-		makeChild('<div id = \"flag\" style=\"background: url('+d.country_flag_image+');\"<img>', '','p',newCard)
+		makeChild('<div class = \"flag\" style=\"background: url('+d.country_flag_image+');\"</div>', '','p',newCard)
     cardsContainer.appendChild(newCard);
     //cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
     cardsContainer.lastElementChild.addEventListener('mousedown', function(){showDetail(d)}, false);
@@ -153,9 +153,15 @@ function showMatches(){
 function showDetail(d){
     console.log("show detail" + d);
     detailContainer.classList.add('open');
+<<<<<<< HEAD
     makeChild(d.title, '', 'h1', detailCard);
     makeChild(d.country, '', 'p', detailCard);
     makeChild(d.project_description, '', 'p', detailCard);
+=======
+    makeChild(d.title, '', 'h1', detailContainer);
+    makeChild(capitaliseFirstLetter(d.country), '', 'p', detailContainer);
+    makeChild(d.project_description, '', 'p', detailContainer);
+>>>>>>> origin/master
 
     menu.addEventListener('click', hideDetail);
 
@@ -166,6 +172,11 @@ function hideDetail(){
     setTimeout(function(){detailCard.innerHTML='';},700);
     menu.removeEventListener('click', hideDetail);
 
+}
+
+function capitaliseFirstLetter(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function getNextOp(user_id,c){
