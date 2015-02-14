@@ -5,7 +5,7 @@ var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
 var optionsPages = document.getElementById('optionsPages');
 var detailContainer = document.getElementById( 'detailContainer' );
-
+var detailCard = document.getElementById( 'detailCard' );
 /* onload run addCard 3 times to populate deck of cards */
 
 for(var i=0;i<3;i++){
@@ -153,9 +153,9 @@ function showMatches(){
 function showDetail(d){
     console.log("show detail" + d);
     detailContainer.classList.add('open');
-    makeChild(d.title, '', 'h1', detailContainer);
-    makeChild(d.country, '', 'p', detailContainer);
-    makeChild(d.project_description, '', 'p', detailContainer);
+    makeChild(d.title, '', 'h1', detailCard);
+    makeChild(d.country, '', 'p', detailCard);
+    makeChild(d.project_description, '', 'p', detailCard);
 
     menu.addEventListener('click', hideDetail);
 
@@ -163,6 +163,7 @@ function showDetail(d){
 
 function hideDetail(){
     detailContainer.classList.remove('open');
+    setTimeout(function(){detailCard.innerHTML='';},700);
     menu.removeEventListener('click', hideDetail);
 
 }
