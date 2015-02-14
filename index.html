@@ -8,12 +8,34 @@
 
 
 <link href="css/main.css" rel="stylesheet" type="text/css" media="screen" />
-<script src='js/background.js'></script>
 
 </head>
 <body>
-    
+<div id="page">
+    <div id="menu">
+        <div id="menuButton" class="menuButton" onclick="showOptions()">options</div>
+        <div id="searchButton" class="menuButton" >search</div>
+        <div id="matchesButton" class="menuButton" onclick="showMatches()">matches</div>
+    </div>
+    <div id="optionsContainer" >
+        <div id="userProfile" class="option">user</div>
+        <div id="preferences" class="option">preferences</div>
+        <div id="share" class="option">share</div>
+        <div id="contact" class="option">contact</div>
 
+    </div>
+    <div id="swipeyPageContainer">
+        <div id="buttons">
+            <div id="leftButton" onclick="matchNo()">no</div>
+            <div id="rightButton" onclick="matchYes()">yes</div>
+        </div>
+        The new cards go here
+    </div>
+    <div id="matchesContainer">
+        The matches go here
+    </div>
+</div>
 </body>
+<script src='js/background.js'></script>
 
 </html>
