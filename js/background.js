@@ -35,7 +35,7 @@ function addCard(d){
     makeChild(d.title, '', 'h1', newCard);
     makeChild(d.country, 'toggle', 'p', newCard);
     makeChild(d.project_description, 'toggle hidden', 'p', newCard);
-    
+		makeChild('<img src=\"'+d.country_flag_image+'\" style=\"clip-path: ellipse(100px 75px at center); -webkit-clip-path:ellipse(100px 75px at center);-moz-clip-path:ellipse(100px 75px at center);\"><img>', '','p',newCard)
     cardsContainer.appendChild(newCard);
     cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
     cardsContainer.lastElementChild.addEventListener('mouseup', cardClick, false);
@@ -46,7 +46,7 @@ function addCard(d){
 function makeChild(content,cls,tag,parent){
     var el = document.createElement( tag );
     el.className =  cls ;
-    el.innerText = content; //maybe use innerHTML for more control
+    el.innerHTML = content; //maybe use innerHTML for more control
     parent.appendChild( el );
 }
 
