@@ -60,7 +60,7 @@ function startTime(){
 function cardClick(e){
     if( new Date() - time < 250){
         var em = this.getElementsByClassName( 'toggle' );
-        for(i=0;i<em.length;i++){
+        for(var i=0;i<em.length;i++){
             em[i].classList.contains('hidden') ? em[i].classList.remove( 'hidden' ) : em[i].classList.add( 'hidden' );
         } 
     }
@@ -91,14 +91,14 @@ function showOptionsPage(){
     console.log("show options page:" + this.id+'Page');
     var page = document.getElementById(this.id+'Page');
     page.classList.add('showOptionsPage');
-    menu.addEventListener('click', hideOptionsPage);
+    menu.addEventListener('mousedown', hideOptionsPage);
 }
 
 function hideOptionsPage(){
     console.log("hide options page");
     var page = document.getElementsByClassName('showOptionsPage')[0];
     page.classList.remove('showOptionsPage');
-    menu.removeEventListener('click', hideOptionsPage);   
+    menu.removeEventListener('mousedown', hideOptionsPage);   
 }
 
 function showOptions(){
@@ -110,7 +110,8 @@ function showOptions(){
 function hideOptions(){
     console.log("hide options");
     optionsContainer.classList.remove('optionsOpen');
-    page.removeEventListener('mousedown', hideOptions);   
+    page.removeEventListener('mousedown', hideOptions); 
+    saveOptions();
 }
 
 function showSearch(){
@@ -142,6 +143,7 @@ function showDetail(d){
 function hideDetail(){
     detailContainer.classList.remove('open');
     menu.removeEventListener('click', hideDetail);
+    detailContainer.innerHTML='';
 
 }
 
@@ -172,6 +174,7 @@ function swipeRight(user_id,op_id){
 	});
 }
 
+matches = [{title:"title", country:"merica", project_description:"nope"}, "fdsafdas"];
 function getMatchList(user_id,c){
 	$.ajax({
 	    type: 'GET',
@@ -182,14 +185,38 @@ function getMatchList(user_id,c){
 	        console.log(jqXHR)
 	    },
 	    success: function(msg) {
-            //clear matches here
-            for(var i=0;i<msg.length;i++){
-                var newMatchCard = document.createElement("div");
-                newMatchCard.classList.add('matchCard');
-                makeChild(d.title, '', 'h1', newMatchCard);
-                makeChild(d.country, 'toggle', 'p', newMatchCard);
-	       }
+           // //save match array as JS object
+           // matches = msg;
+            //drawMatches()
         }
 	});
 }
 
+//not functional
+function drawMatches(){
+    for(var i=0;i<matches.length;i++){
+            var d = matches[i];
+            var newMatchCard = document.createElement("div");
+            newMatchCard.classList.add('matchCard');
+            makeChild(d.title, '', 'h1', newMatchCard);
+            matchesContainer.appendChild(newMatchCard);
+       }    
+}
+
+function saveOptions(){
+    //console.log('do some url stuf here');
+}
+
+matchesContainer.addEventListener('click', detailClick);
+
+function detailClick(e){
+    var tgt = e.target;
+    console.log(tgt);
+    for(var i=0;i<matchesContainer.children.length;i++){
+        if( tgt === matchesContainer.children[i]){
+            console.log(i);
+            showDetail(matches[i]);
+            break;
+        }
+    }
+}
