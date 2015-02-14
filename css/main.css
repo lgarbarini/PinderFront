@@ -27,7 +27,7 @@ html, body{
  }
 
 #page{
-    background: red;
+		border-radius: 25px;
     width: 500px;
     height: 800px;
     margin: 2% calc(50% - 250px) 0 calc(50% - 250px);
@@ -36,22 +36,26 @@ html, body{
 }
 
 #menu{
-    background: pink;
     width: 100%;
     height: 6%;
+		padding:10px 70px 0px 70px;
 }
 
 .menuButton{
-    background: orange;
+		margin-left:auto;
+		margin-right:auto;
     height: 100%;
     float: left;
-    padding: 0 15px 0 15px; 
-    border: 1px solid black;
+    padding: 8px 15px 0 15px; 
     box-sizing: border-box;
+		font-weight: bold;
+}
+.menuButton:hover{
+	background: #C2C2C2;
+	border-radius: 10px;
 }
 
 #optionsContainer{
-    background: violet;
     width: 30%; 
     height: 94%;
     overflow: hidden;
@@ -67,7 +71,6 @@ html, body{
 }
 
 .option{
-    background: pink;
     width: 100%;
     height: 8%;
     border: 1px solid black;
@@ -91,9 +94,7 @@ html, body{
     left: 0;   
 }
 
-
 #swipeyPageContainer{
-    background: blue;
     height: 94%;
     width: 100%; 
     left: -0%; /* move between -100 and 0*/
@@ -108,7 +109,7 @@ html, body{
 }
 
 #cardsContainer{
-    color: #eaeaea;
+    color: #b2b2b2;
     position: absolute;
     top: 0;
     width: 100%;
@@ -122,27 +123,25 @@ html, body{
 .card{
     position: absolute;
     top: 0;
-    background: white;
     width: 90%;
     height: 90%;
     padding: 10%;
     box-sizing: border-box;
-    transition: .7s;
+    transition: .5s;
 		border-radius: 25px;
-		border: 1px solid #A6A6A6;
 }
 .card:nth-child(1){
-    background: #dae3ff;
+    background: #FFFFFF;
     z-index: 50;
     top: -3px;
     left: 3px;
 }
 .card:nth-child(2){
-    background: #a5f5f2;
+    background: #F8F8F8;
     z-index: 49;
 }
 .card:nth-child(3){
-    background: #ccffea;
+    background: #DADADA;
     z-index: 48;
     top: 3px;
     left: -3px;
@@ -162,7 +161,6 @@ html, body{
 }
 
 #buttons{
-    background: LightGrey;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -173,8 +171,8 @@ html, body{
 
 #leftButton{
     background: #fc5d5d;
-    height: 5em;
-    width: 5em;
+    height: 7em;
+    width: 7em;
     position: absolute;
     border-radius: 2.5em;
     left: 20%;
@@ -185,8 +183,8 @@ html, body{
 
 #rightButton{
     background: #81e66f;
-    height: 5em;
-    width: 5em;
+    height: 7em;
+    width: 7em;
     position: absolute; 
     border-radius: 2.5em;
     right: 20%;
@@ -196,7 +194,6 @@ html, body{
 }
 
 #matchesContainer{
-    background: green;
     height: 94%;
     width: 100%;
     position: absolute;
@@ -210,14 +207,13 @@ html, body{
 }
 
 .matchCard{
-    background: cyan;
     width: 100%;
     height: 10%;
     left: 0;
 }
 
 #detailContainer{
-    background: red ;
+		background-color: #D5D5D5;
     height: 100%;
     width: 100%;
     box-sizing: border-box;
@@ -229,7 +225,6 @@ html, body{
 }
 
 #detailMenu{
-    background: orange ;
     height: 3em;
     padding: .5em;
     box-sizing: border-box;
@@ -242,7 +237,8 @@ html, body{
 }
 
 #SMhide{
-    background: violet;
+		background-image: url(../img/back.svg);
+		background-size: 100% 100%;
     height: 2em;
     width: 2em;
     position: absolute; 
@@ -273,6 +269,7 @@ html, body{
     background-repeat: no-repeat;
 }
 
+
 @media (max-aspect-ratio: 4/5) {
     
 #page{
@@ -282,4 +279,12 @@ html, body{
     margin: 0;
     position: fixed; /* whatever */
 }
+
+#flag{
+	border-radius: 30px;
+	width: 250px;
+	height: 150px;
+	background-size:cover !important;
+	background-position: center !important;
+	border: 1px solid #A3A3A3;
 }

@@ -5,7 +5,7 @@ var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
 var optionsPages = document.getElementById('optionsPages');
 var detailContainer = document.getElementById( 'detailContainer' );
-var detailCard = document.getElementById( 'detailCard' );
+
 /* onload run addCard 3 times to populate deck of cards */
 
 for(var i=0;i<3;i++){
@@ -13,12 +13,32 @@ for(var i=0;i<3;i++){
     getNextOp(user_id,addCard);
 }
 
+var canvas = document.getElementById("acanvas");
+
+var w = canvas.width = 200;
+var h = canvas.height = 200;
+
+var context = canvas.getContext("2d");
+
+for(i=0;i<w;i++) {
+    for(j=0;j<h;j++) {
+        
+        var num = Math.ceil(Math.random()*10+210)
+        context.fillStyle = "rgb(" + num + "," + num + "," + num + ")";
+        context.fillRect(i, j, 1, 1);
+    }
+}
+
+$("#page").css ( {
+    "background": "url("+canvas.toDataURL()+")"
+});
+
 
 /* remove card from top of deck, add one to back */
 function showNextCard(dir){
     //remove top card
     cardsContainer.firstElementChild.classList.add('swipe'+dir);
-    setTimeout( function(){cardsContainer.removeChild(cardsContainer.firstElementChild)}, 700);
+    setTimeout( function(){cardsContainer.removeChild(cardsContainer.firstElementChild)}, 500);
     
     //add new card 
 		var user_id = document.getElementById('userid').innerText;
@@ -37,7 +57,7 @@ function addCard(d){
     makeChild(d.country, 'toggle', 'p', newCard);
     makeChild(d.project_description, 'toggle hidden', 'p', newCard);
 		makeChild('<div id=\"op_id\" style=\"display: none;\">'+d.req_id+'</div>', '', 'div', newCard);
-		makeChild('<img src=\"'+d.country_flag_image+'\" style=\"clip-path: ellipse(100px 75px at center); -webkit-clip-path:ellipse(100px 75px at center);-moz-clip-path:ellipse(100px 75px at center);\"><img>', '','p',newCard)
+		makeChild('<div id = \"flag\" style=\"background: url('+d.country_flag_image+');\"<img>', '','p',newCard)
     cardsContainer.appendChild(newCard);
     //cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
     cardsContainer.lastElementChild.addEventListener('mousedown', function(){showDetail(d)}, false);
@@ -60,7 +80,7 @@ function startTime(){
 function cardClick(e){
     if( new Date() - time < 250){
         var em = this.getElementsByClassName( 'toggle' );
-        for(var i=0;i<em.length;i++){
+        for(i=0;i<em.length;i++){
             em[i].classList.contains('hidden') ? em[i].classList.remove( 'hidden' ) : em[i].classList.add( 'hidden' );
         } 
     }
@@ -70,16 +90,15 @@ function cardClick(e){
 /* match functions */
 function matchNo(){
     console.log('nope');
-    showNextCard('Left');
-    hideDetail();
+		showNextCard('Left');
 }
 
 function matchYes(){
     console.log("it's a match");
-    var user_id = document.getElementById('userid').innerText;
-    swipeRight(user_id,document.getElementById('op_id').innerText);
-    showNextCard('Right');
-    hideDetail();		
+		var user_id = document.getElementById('userid').innerText;
+		swipeRight(user_id,document.getElementById('op_id').innerText);
+		showNextCard('Right');
+		
 }
 
 /* Page Show/Hide Functions */
@@ -92,14 +111,14 @@ function showOptionsPage(){
     console.log("show options page:" + this.id+'Page');
     var page = document.getElementById(this.id+'Page');
     page.classList.add('showOptionsPage');
-    menu.addEventListener('mousedown', hideOptionsPage);
+    menu.addEventListener('click', hideOptionsPage);
 }
 
 function hideOptionsPage(){
     console.log("hide options page");
     var page = document.getElementsByClassName('showOptionsPage')[0];
     page.classList.remove('showOptionsPage');
-    menu.removeEventListener('mousedown', hideOptionsPage);   
+    menu.removeEventListener('click', hideOptionsPage);   
 }
 
 function showOptions(){
@@ -111,8 +130,7 @@ function showOptions(){
 function hideOptions(){
     console.log("hide options");
     optionsContainer.classList.remove('optionsOpen');
-    page.removeEventListener('mousedown', hideOptions); 
-    saveOptions();
+    page.removeEventListener('mousedown', hideOptions);   
 }
 
 function showSearch(){
@@ -133,18 +151,17 @@ function showMatches(){
 function showDetail(d){
     console.log("show detail" + d);
     detailContainer.classList.add('open');
-    makeChild(d.title, '', 'h1', detailCard);
-    makeChild(d.country, '', 'p', detailCard);
-    makeChild(d.project_description, '', 'p', detailCard);
+    makeChild(d.title, '', 'h1', detailContainer);
+    makeChild(d.country, '', 'p', detailContainer);
+    makeChild(d.project_description, '', 'p', detailContainer);
 
-    setTimeout(function(){detailCard.addEventListener('mousedown', hideDetail);}, 500);
+    menu.addEventListener('click', hideDetail);
 
 }
 
 function hideDetail(){
     detailContainer.classList.remove('open');
-    detailCard.removeEventListener('mousedown', hideDetail);
-    setTimeout(function(){detailCard.innerHTML='';}, 500);
+    menu.removeEventListener('click', hideDetail);
 
 }
 
@@ -175,7 +192,6 @@ function swipeRight(user_id,op_id){
 	});
 }
 
-matches = [{title:"title", country:"merica", project_description:"nope"}, "fdsafdas"];
 function getMatchList(user_id,c){
 	$.ajax({
 	    type: 'GET',
@@ -186,38 +202,14 @@ function getMatchList(user_id,c){
 	        console.log(jqXHR)
 	    },
 	    success: function(msg) {
-           // //save match array as JS object
-           // matches = msg;
-            //drawMatches()
+            //clear matches here
+            for(var i=0;i<msg.length;i++){
+                var newMatchCard = document.createElement("div");
+                newMatchCard.classList.add('matchCard');
+                makeChild(d.title, '', 'h1', newMatchCard);
+                makeChild(d.country, 'toggle', 'p', newMatchCard);
+	       }
         }
 	});
 }
 
-//not functional
-function drawMatches(){
-    for(var i=0;i<matches.length;i++){
-            var d = matches[i];
-            var newMatchCard = document.createElement("div");
-            newMatchCard.classList.add('matchCard');
-            makeChild(d.title, '', 'h1', newMatchCard);
-            matchesContainer.appendChild(newMatchCard);
-       }    
-}
-
-function saveOptions(){
-    //console.log('do some url stuf here');
-}
-
-matchesContainer.addEventListener('click', detailClick);
-
-function detailClick(e){
-    var tgt = e.target;
-    console.log(tgt);
-    for(var i=0;i<matchesContainer.children.length;i++){
-        if( tgt === matchesContainer.children[i]){
-            console.log(i);
-            showDetail(matches[i]);
-            break;
-        }
-    }
-}
