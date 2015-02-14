@@ -4,13 +4,16 @@ var swipeyPageContainer = document.getElementById( 'swipeyPageContainer' );
 var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
 
+/* onload run addCard 3 times to populate deck of cards */
+
+
 /* remove card from top of deck, add one to back */
 function showNextCard(){
     //remove top card
     cardsContainer.removeChild(cardsContainer.firstElementChild);
     
     //add new card 
-    //addCard( data );
+    addCard( 'data' );
 }
 
 //takes JSON object (results[i] from backend)
@@ -18,18 +21,39 @@ function addCard(d){
     var newCard = document.createElement("div");
     newCard.classList.add('card');
     
-    //example use (should for loop through info from d )
-    makeChild('fdsafdas','p',newCard);
+    //conver to for loop once we know what to make;
+    //these are strings since I'm too lazy to make d a real JSON object
+    makeChild("d.title", '', 'h1', newCard);
+    makeChild("d.country", 'toggle', 'p', newCard);
+    makeChild("d.project_description", 'toggle hidden', 'p', newCard);
     
     cardsContainer.appendChild(newCard);
+    cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
+    cardsContainer.lastElementChild.addEventListener('mouseup', cardClick, false);
 }
 
 //makes child node (not gonna make prototype because lazy)
 //content is string of content, tag is string of tag type
-function makeChild(content,tag,parent){
+function makeChild(content,cls,tag,parent){
     var el = document.createElement( tag );
+    el.className =  cls ;
     el.innerText = content; //maybe use innerHTML for more control
     parent.appendChild( el );
+}
+
+var time = new Date();
+function startTime(){
+    time = new Date();
+}
+/* shows extended data */
+function cardClick(e){
+    if( new Date() - time < 250){
+        var em = this.getElementsByClassName( 'toggle' );
+        for(i=0;i<em.length;i++){
+            em[i].classList.contains('hidden') ? em[i].classList.remove( 'hidden' ) : em[i].classList.add( 'hidden' );
+        } 
+    }
+    
 }
 
 /* match functions */

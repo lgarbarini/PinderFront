@@ -107,6 +107,10 @@ html, body{
     left: -3px;
 }
 
+.hidden{
+    display: none;
+}
+
 #buttons{
     background: LightGrey;
     position: absolute;
