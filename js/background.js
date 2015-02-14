@@ -14,19 +14,21 @@ function showNextCard(){
     cardsContainer.removeChild(cardsContainer.firstElementChild);
     
     //add new card 
-    addCard( 'data' );
+		var user_id = document.getElementById('userid');
+		getNextOp(user_id,addCard);
 }
 
 //takes JSON object (results[i] from backend)
 function addCard(d){
+	console.log("added card");
     var newCard = document.createElement("div");
     newCard.classList.add('card');
     
     //conver to for loop once we know what to make;
     //these are strings since I'm too lazy to make d a real JSON object
-    makeChild("d.title", '', 'h1', newCard);
-    makeChild("d.country", 'toggle', 'p', newCard);
-    makeChild("d.project_description", 'toggle hidden', 'p', newCard);
+    makeChild(d.title, '', 'h1', newCard);
+    makeChild(d.country, 'toggle', 'p', newCard);
+    makeChild(d.project_description, 'toggle hidden', 'p', newCard);
     
     cardsContainer.appendChild(newCard);
     cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
@@ -59,12 +61,15 @@ function cardClick(e){
 
 /* match functions */
 function matchNo(){
+		var user_id = document.getElementById('userid');
     console.log('nope');
+		getNextOp(user_id,addCard);
 }
 
 function matchYes(){
+		var user_id = document.getElementById('userid');
     console.log("it's a match motherfucker");
-
+		getNextOp(user_id,addCard);
 }
 
 /* Page Show/Hide Functions */
@@ -110,4 +115,19 @@ function hideMatches(){
     matchesContainer.classList.remove('matchesOpen');
     swipeyPageContainer.classList.remove('SPmatchesOpen');
     page.removeEventListener('mousedown', hideMatches);   
+}
+
+function getNextOp(user_id,c){
+	$.ajax({
+	    type: 'GET',
+	    dataType: 'json',
+	    data: {},
+	    url: "http://pinderback.herokuapp.com/GetNextOp/lgarbar",
+	    error: function (jqXHR, textStatus, errorThrown) {
+	        console.log(jqXHR)
+	    },
+	    success: function(msg) {
+	       c(msg)
+	    }
+	});
 }
