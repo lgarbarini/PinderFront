@@ -6,12 +6,12 @@ var matchesContainer = document.getElementById( 'matchesContainer' );
 var optionsPages = document.getElementById('optionsPages');
 
 /* onload run addCard 3 times to populate deck of cards */
-function onLoad(){
-	for(var i=0;i<3;i++){
-	    var user_id = document.getElementById('userid');
-	    getNextOp(user_id,addCard);
-	}
+
+for(var i=0;i<3;i++){
+    var user_id = document.getElementById('userid').innerText;
+    getNextOp(user_id,addCard);
 }
+
 
 /* remove card from top of deck, add one to back */
 function showNextCard(dir){
@@ -20,8 +20,13 @@ function showNextCard(dir){
     setTimeout( function(){cardsContainer.removeChild(cardsContainer.firstElementChild)}, 700);
     
     //add new card 
+<<<<<<< HEAD
     var user_id = document.getElementById('userid');
     getNextOp(user_id,addCard);
+=======
+		var user_id = document.getElementById('userid').innerText;
+		getNextOp(user_id,addCard);
+>>>>>>> Swiping right now works, leaving swiping right for later, match list partially implemented
 }
 
 //takes JSON object (results[i] from backend)
@@ -35,6 +40,7 @@ function addCard(d){
     makeChild(d.title, '', 'h1', newCard);
     makeChild(d.country, 'toggle', 'p', newCard);
     makeChild(d.project_description, 'toggle hidden', 'p', newCard);
+		makeChild('<div id=\"op_id\" style=\"display: none;\">'+d.req_id+'</div>', '', 'div', newCard);
 		makeChild('<img src=\"'+d.country_flag_image+'\" style=\"clip-path: ellipse(100px 75px at center); -webkit-clip-path:ellipse(100px 75px at center);-moz-clip-path:ellipse(100px 75px at center);\"><img>', '','p',newCard)
     cardsContainer.appendChild(newCard);
     cardsContainer.lastElementChild.addEventListener('mousedown', startTime, false);
@@ -73,7 +79,10 @@ function matchNo(){
 
 function matchYes(){
     console.log("it's a match motherfucker");
-		showNextCard('Right');
+		var user_id = document.getElementById('userid').innerText;
+		swipeRight(user_id,document.getElementById('op_id').innerText);
+		showNextCard();
+		
 }
 
 /* Page Show/Hide Functions */
@@ -118,6 +127,8 @@ function showMatches(){
     console.log("show matches");
     matchesContainer.classList.add('matchesOpen');
     swipeyPageContainer.classList.add('SPmatchesOpen');
+		var user_id = document.getElementById('userid').innerText;
+		getMatchList(user_id);
   //  page.addEventListener('mousedown', hideMatches);
 }
 
@@ -127,12 +138,39 @@ function getNextOp(user_id,c){
 	    type: 'GET',
 	    dataType: 'json',
 	    data: {},
-	    url: "http://pinderback.herokuapp.com/GetNextOp/lgarbar",
+	    url: "http://pinderback.herokuapp.com/GetNextOp/"+user_id,
 	    error: function (jqXHR, textStatus, errorThrown) {
 	        console.log(jqXHR)
 	    },
 	    success: function(msg) {
 	       c(msg)
+	    }
+	});
+}
+
+function swipeRight(user_id,op_id){
+	$.ajax({
+	    type: 'GET',
+	    dataType: 'json',
+	    data: {},
+	    url: "http://pinderback.herokuapp.com/SwipeRight/"+user_id+"/"+op_id,
+	    error: function (jqXHR, textStatus, errorThrown) {
+	        console.log(jqXHR)
+	    }
+	});
+}
+
+function getMatchList(user_id,c){
+	$.ajax({
+	    type: 'GET',
+	    dataType: 'json',
+	    data: {},
+	    url: "http://pinderback.herokuapp.com/GetMatchList/"+user_id,
+	    error: function (jqXHR, textStatus, errorThrown) {
+	        console.log(jqXHR)
+	    },
+	    success: function(msg) {
+	    		 makeChild(msg, '', 'div', matchesContainer);
 	    }
 	});
 }
