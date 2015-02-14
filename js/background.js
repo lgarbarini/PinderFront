@@ -76,7 +76,7 @@ function matchYes(){
     console.log("it's a match motherfucker");
 		var user_id = document.getElementById('userid').innerText;
 		swipeRight(user_id,document.getElementById('op_id').innerText);
-		showNextCard();
+		showNextCard('Right');
 		
 }
 
