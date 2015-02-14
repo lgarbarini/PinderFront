@@ -82,13 +82,14 @@ function showOptionsPage(){
     console.log("show options page:" + this.id+'Page');
     var page = document.getElementById(this.id+'Page');
     page.classList.add('showOptionsPage');
-    page.addEventListener('click', hideOptionsPage);
+    menu.addEventListener('click', hideOptionsPage);
 }
 
 function hideOptionsPage(){
     console.log("hide options page");
-    this.classList.remove('showOptionsPage');
-    page.removeEventListener('mousedown', hideMatches);   
+    var page = document.getElementsByClassName('showOptionsPage')[0];
+    page.classList.remove('showOptionsPage');
+    menu.removeEventListener('click', hideOptionsPage);   
 }
 
 function showOptions(){
@@ -103,19 +104,19 @@ function hideOptions(){
     page.removeEventListener('mousedown', hideOptions);   
 }
 
+function showSearch(){
+    console.log("show search");
+    matchesContainer.classList.remove('matchesOpen');
+    swipeyPageContainer.classList.remove('SPmatchesOpen');
+}
+
 function showMatches(){
     console.log("show matches");
     matchesContainer.classList.add('matchesOpen');
     swipeyPageContainer.classList.add('SPmatchesOpen');
-    page.addEventListener('mousedown', hideMatches);
+  //  page.addEventListener('mousedown', hideMatches);
 }
 
-function hideMatches(){
-    console.log("hide matches");
-    matchesContainer.classList.remove('matchesOpen');
-    swipeyPageContainer.classList.remove('SPmatchesOpen');
-    page.removeEventListener('mousedown', hideMatches);   
-}
 
 function getNextOp(user_id,c){
 	$.ajax({
@@ -131,3 +132,9 @@ function getNextOp(user_id,c){
 	    }
 	});
 }
+//function hideMatches(){
+//    console.log("hide matches");
+//    matchesContainer.classList.remove('matchesOpen');
+//    swipeyPageContainer.classList.remove('SPmatchesOpen');
+//    page.removeEventListener('mousedown', hideMatches);   
+//}
