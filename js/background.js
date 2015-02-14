@@ -14,13 +14,14 @@ function onLoad(){
 }
 
 /* remove card from top of deck, add one to back */
-function showNextCard(){
+function showNextCard(dir){
     //remove top card
-    cardsContainer.removeChild(cardsContainer.firstElementChild);
+    cardsContainer.firstElementChild.classList.add('swipe'+dir);
+    setTimeout( function(){cardsContainer.removeChild(cardsContainer.firstElementChild)}, 700);
     
     //add new card 
-		var user_id = document.getElementById('userid');
-		getNextOp(user_id,addCard);
+    var user_id = document.getElementById('userid');
+    getNextOp(user_id,addCard);
 }
 
 //takes JSON object (results[i] from backend)
@@ -67,12 +68,12 @@ function cardClick(e){
 /* match functions */
 function matchNo(){
     console.log('nope');
-		showNextCard();
+		showNextCard('Left');
 }
 
 function matchYes(){
     console.log("it's a match motherfucker");
-		showNextCard();
+		showNextCard('Right');
 }
 
 /* Page Show/Hide Functions */
