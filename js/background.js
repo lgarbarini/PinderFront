@@ -153,15 +153,9 @@ function showMatches(){
 function showDetail(d){
     console.log("show detail" + d);
     detailContainer.classList.add('open');
-<<<<<<< HEAD
     makeChild(d.title, '', 'h1', detailCard);
     makeChild(d.country, '', 'p', detailCard);
     makeChild(d.project_description, '', 'p', detailCard);
-=======
-    makeChild(d.title, '', 'h1', detailContainer);
-    makeChild(capitaliseFirstLetter(d.country), '', 'p', detailContainer);
-    makeChild(d.project_description, '', 'p', detailContainer);
->>>>>>> origin/master
 
     menu.addEventListener('click', hideDetail);
 
