@@ -212,12 +212,12 @@ function getMatchList(user_id,c){
 	    success: function(msg) {
             //clear matches here
 				matchesContainer.innerHTML="";
-            for(var i=0;i<msg.list.length;i++){
+            for(var i=msg.list.length-1;i>0;i--){
                 var newMatchCard = document.createElement("div");
                 newMatchCard.classList.add('matchCard');
                 makeChild(msg.list[i].title, '', 'h2', newMatchCard);
                 makeChild(msg.list[i].country, 'toggle', 'p', newMatchCard);
-								matchesContainer.appendChild(newMatchCard);
+                matchesContainer.appendChild(newMatchCard);
 	       }
         }
 	});
