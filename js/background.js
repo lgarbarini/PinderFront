@@ -61,15 +61,13 @@ function cardClick(e){
 
 /* match functions */
 function matchNo(){
-		var user_id = document.getElementById('userid');
     console.log('nope');
-		getNextOp(user_id,addCard);
+		showNextCard();
 }
 
 function matchYes(){
-		var user_id = document.getElementById('userid');
     console.log("it's a match motherfucker");
-		getNextOp(user_id,addCard);
+		showNextCard();
 }
 
 /* Page Show/Hide Functions */
