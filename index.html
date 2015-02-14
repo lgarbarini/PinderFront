@@ -10,14 +10,14 @@
 <link href="css/main.css" rel="stylesheet" type="text/css" media="screen" />
 
 </head>
-<body>
+<body onload="onLoad()">
 <div id="userid" style="display: none;">
 	
 </div>
 <div id="page">
     <div id="menu">
         <div id="menuButton" class="menuButton" onclick="showOptions()">options</div>
-        <div id="searchButton" class="menuButton" onclick="showSearch()">search</div>
+        <div id="searchButton" class="menuButton" >search</div>
         <div id="matchesButton" class="menuButton" onclick="showMatches()">matches</div>
     </div>
     <div id="optionsContainer" >
@@ -36,7 +36,7 @@
     
     <div id="swipeyPageContainer">
         <div id="cardsContainer">
-            <div class="card">
+            <!-- <div class="card">
                 <h1>Job Description</h1>
                 <p class="toggle">fdafjkdlsafj;as</p>
                 <p class="toggle hidden">the long descriptions and things</p>
@@ -45,7 +45,7 @@
                 <h1>Job Description 2</h1>
                 <p>klel</p>
             </div>
-            <div class="card"></div>
+            <div class="card"></div> -->
         </div>
         <div id="buttons">
             <div id="leftButton" onclick="matchNo()">no</div>

@@ -6,7 +6,12 @@ var matchesContainer = document.getElementById( 'matchesContainer' );
 var optionsPages = document.getElementById('optionsPages');
 
 /* onload run addCard 3 times to populate deck of cards */
-
+function onLoad(){
+	for(var i=0;i<3;i++){
+	    var user_id = document.getElementById('userid');
+	    getNextOp(user_id,addCard);
+	}
+}
 
 /* remove card from top of deck, add one to back */
 function showNextCard(){
