@@ -3,6 +3,7 @@ var optionsContainer = document.getElementById( 'optionsContainer' );
 var swipeyPageContainer = document.getElementById( 'swipeyPageContainer' );
 var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
+var optionsPages = document.getElementById('optionsPages');
 
 /* onload run addCard 3 times to populate deck of cards */
 
@@ -67,6 +68,24 @@ function matchYes(){
 }
 
 /* Page Show/Hide Functions */
+for(var i=0; i<optionsContainer.children.length;i++){
+    console.log(optionsContainer.children[i])
+    optionsContainer.children[i].addEventListener('click', showOptionsPage);
+}
+
+function showOptionsPage(){
+    console.log("show options page:" + this.id+'Page');
+    var page = document.getElementById(this.id+'Page');
+    page.classList.add('showOptionsPage');
+    page.addEventListener('click', hideOptionsPage);
+}
+
+function hideOptionsPage(){
+    console.log("hide options page");
+    this.classList.remove('showOptionsPage');
+    page.removeEventListener('mousedown', hideMatches);   
+}
+
 function showOptions(){
     console.log("show options");
     optionsContainer.classList.add('optionsOpen');

@@ -54,6 +54,24 @@ html, body{
     box-sizing: border-box;
 }
 
+
+.optionsPage{
+    background: #1eac75;
+    height: 94%;
+    width: 100%; 
+    left: 100%; /* move to zero to and 0*/
+    float: left;
+    position: absolute;
+    top: 6%;
+    z-index: 99;
+    transition: left .2s;
+}
+
+.showOptionsPage{
+    left: 0;   
+}
+
+
 #swipeyPageContainer{
     background: blue;
     height: 94%;
