@@ -5,7 +5,7 @@ var cardsContainer = document.getElementById('cardsContainer');
 var matchesContainer = document.getElementById( 'matchesContainer' );
 var optionsPages = document.getElementById('optionsPages');
 var detailContainer = document.getElementById( 'detailContainer' );
-
+var detailCard = document.getElementById( 'detailCard' );
 /* onload run addCard 3 times to populate deck of cards */
 
 for(var i=0;i<3;i++){
@@ -70,15 +70,16 @@ function cardClick(e){
 /* match functions */
 function matchNo(){
     console.log('nope');
-		showNextCard('Left');
+    showNextCard('Left');
+    hideDetail();
 }
 
 function matchYes(){
     console.log("it's a match");
-		var user_id = document.getElementById('userid').innerText;
-		swipeRight(user_id,document.getElementById('op_id').innerText);
-		showNextCard('Right');
-		
+    var user_id = document.getElementById('userid').innerText;
+    swipeRight(user_id,document.getElementById('op_id').innerText);
+    showNextCard('Right');
+    hideDetail();		
 }
 
 /* Page Show/Hide Functions */
@@ -132,18 +133,18 @@ function showMatches(){
 function showDetail(d){
     console.log("show detail" + d);
     detailContainer.classList.add('open');
-    makeChild(d.title, '', 'h1', detailContainer);
-    makeChild(d.country, '', 'p', detailContainer);
-    makeChild(d.project_description, '', 'p', detailContainer);
+    makeChild(d.title, '', 'h1', detailCard);
+    makeChild(d.country, '', 'p', detailCard);
+    makeChild(d.project_description, '', 'p', detailCard);
 
-    menu.addEventListener('click', hideDetail);
+    setTimeout(function(){detailCard.addEventListener('mousedown', hideDetail);}, 500);
 
 }
 
 function hideDetail(){
     detailContainer.classList.remove('open');
-    menu.removeEventListener('click', hideDetail);
-    detailContainer.innerHTML='';
+    detailCard.removeEventListener('mousedown', hideDetail);
+    setTimeout(function(){detailCard.innerHTML='';}, 500);
 
 }
 

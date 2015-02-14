@@ -178,9 +178,9 @@ html, body{
     position: absolute;
     border-radius: 2.5em;
     left: 20%;
-		background-image: url(../img/reject.svg);
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
+    background-image: url(../img/reject.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 #rightButton{
@@ -188,11 +188,11 @@ html, body{
     height: 5em;
     width: 5em;
     position: absolute; 
-		border-radius: 2.5em;
+    border-radius: 2.5em;
     right: 20%;
-		background-image: url(../img/check-mark.svg);
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
+    background-image: url(../img/check-mark.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 #matchesContainer{
@@ -218,12 +218,57 @@ html, body{
 
 #detailContainer{
     background: red ;
-    height: 94%;
+    height: 100%;
     width: 100%;
+    box-sizing: border-box;
     position: absolute;
-    top: 6%;
+    top: 0%;
     left: 100%; 
     transition: left 1s;
     z-index: 99;
 }
 
+#detailMenu{
+    background: orange ;
+    height: 3em;
+    padding: .5em;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#detailCard{
+    padding: 5%;
+
+}
+
+#SMhide{
+    background: violet;
+    height: 2em;
+    width: 2em;
+    position: absolute; 
+    left: 10%;
+}
+
+#SMleftButton{
+    background: #fc5d5d;
+    height: 2em;
+    width: 2em;
+    position: absolute;
+    border-radius: 1em;
+    right: 20%;
+    background-image: url(../img/reject.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#SMrightButton{
+    background: #81e66f;
+    height: 2em;
+    width: 2em;
+    position: absolute; 
+    border-radius: 1em;
+    right: 10%;
+    background-image: url(../img/check-mark.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
